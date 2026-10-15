@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "name": "atlas-console-alan-vo",
+  "owner": "ALANDVO",
+  "email": "alanvo@gmail.com",
+  "domain": "AI/ML Developer Tools",
+  "summary": "Work in progress: atlas-console-alan-vo",
+  "workflows": [
+    "Create and execute multi-agent penetration testing flows with scope validation",
+    "Manage testing scope (IP ranges, ports, services) with import/export",
+    "Connect external security tools via MCP (Burp Suite, Nuclei, custom servers)",
+    "Configure and test custom LLM providers through web UI with encrypted storage",
+    "Browse paginated resource library with virtual scrolling for large datasets"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "status": "work-in-progress"
+}
