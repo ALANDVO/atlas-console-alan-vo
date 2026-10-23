@@ -53,7 +53,7 @@
     {
       "id": "markdown-renderer",
       "title": "Markdown renderer with proper code block handling",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Triple backticks inside code blocks render as literal text",
         "Nested code blocks don't break page layout",
