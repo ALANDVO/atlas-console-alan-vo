@@ -27,7 +27,7 @@ Tests: `backend/tests/test_auth.py`, `backend/tests/test_dashboard.py`, `fronten
 
 ### markdown-renderer — Markdown renderer with proper code block handling
 
-Status: planned
+Status: done
 
 Acceptance:
 - Triple backticks inside code blocks render as literal text

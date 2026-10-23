@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.1.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.0.1 - 2024-10-23
+
+### Added
+- MarkdownRenderer component with proper nested code block handling
+- Triple backticks inside fenced code blocks now render as literal text
+- Support for fenced code blocks (``` and ~~~), headings, blockquotes, lists, links, bold, italic, inline code
+- HTML escaping for XSS prevention
+- Comprehensive test suite (39 tests)
+
+### Fixed
+- Issue where nested triple backticks inside code blocks were incorrectly interpreted as closing fences
+
 ## 1.0.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
