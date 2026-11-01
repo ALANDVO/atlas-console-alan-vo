@@ -1,8 +1,15 @@
 # Changelog
 
+## 1.2.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.1.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
+
+### Fixed
+- React key warning in MarkdownRenderer: added stable unique IDs to all AST nodes during parsing and use them as keys in renderNode children mappings
 
 ## 1.0.1 - 2024-10-23
 

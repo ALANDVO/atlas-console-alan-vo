@@ -1,5 +1,10 @@
 import React from 'react'
 
+let nodeIdCounter = 0
+function generateNodeId(): string {
+  return `node_${++nodeIdCounter}`
+}
+
 /**
  * MarkdownRenderer - A safe markdown renderer that properly handles nested code blocks.
  *
@@ -48,6 +53,7 @@ interface ParseNode {
   level?: number
   ordered?: boolean
   url?: string
+  id: string
 }
 
 function parseMarkdown(text: string): ParseNode[] {
@@ -82,6 +88,7 @@ function parseMarkdown(text: string): ParseNode[] {
         type: 'code_block',
         content: codeLines.join('\n'),
         language: language || undefined,
+        id: generateNodeId(),
       })
       continue
     }
@@ -93,6 +100,7 @@ function parseMarkdown(text: string): ParseNode[] {
         type: 'heading',
         level: headingMatch[1].length,
         children: parseInline(headingMatch[2]),
+        id: generateNodeId(),
       })
       i++
       continue
@@ -109,6 +117,7 @@ function parseMarkdown(text: string): ParseNode[] {
       nodes.push({
         type: 'blockquote',
         children: parseMarkdown(quoteLines.join('\n')),
+        id: generateNodeId(),
       })
       continue
     }
@@ -121,10 +130,11 @@ function parseMarkdown(text: string): ParseNode[] {
         items.push({
           type: 'list_item',
           children: parseInline(lines[i].replace(/^ {0,3}[-*+]\s+/, '')),
+          id: generateNodeId(),
         })
         i++
       }
-      nodes.push({ type: 'ul', children: items })
+      nodes.push({ type: 'ul', children: items, id: generateNodeId() })
       continue
     }
 
@@ -136,10 +146,11 @@ function parseMarkdown(text: string): ParseNode[] {
         items.push({
           type: 'list_item',
           children: parseInline(lines[i].replace(/^ {0,3}\d+\.\s+/, '')),
+          id: generateNodeId(),
         })
         i++
       }
-      nodes.push({ type: 'ol', children: items })
+      nodes.push({ type: 'ol', children: items, id: generateNodeId() })
       continue
     }
 
@@ -161,6 +172,7 @@ function parseMarkdown(text: string): ParseNode[] {
       nodes.push({
         type: 'paragraph',
         children: parseInline(paraLines.join(' ')),
+        id: generateNodeId(),
       })
       continue
     }
@@ -195,7 +207,7 @@ function parseInline(text: string): ParseNode[] {
 
   for (const segment of segments) {
     if (segment.type === 'inline_code') {
-      result.push({ type: 'inline_code', content: segment.content })
+      result.push({ type: 'inline_code', content: segment.content, id: generateNodeId() })
       continue
     }
 
@@ -211,7 +223,7 @@ function parseInline(text: string): ParseNode[] {
         const beforeLink = textContent.slice(linkLastIndex, linkMatch.index)
         nodes.push(...parseBoldItalic(beforeLink))
       }
-      nodes.push({ type: 'link', content: linkMatch[1], url: linkMatch[2] })
+      nodes.push({ type: 'link', content: linkMatch[1], url: linkMatch[2], id: generateNodeId() })
       linkLastIndex = linkMatch.index + linkMatch[0].length
     }
 
@@ -234,21 +246,21 @@ function parseBoldItalic(text: string): ParseNode[] {
 
   while ((match = regex.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      nodes.push({ type: 'text', content: text.slice(lastIndex, match.index) })
+      nodes.push({ type: 'text', content: text.slice(lastIndex, match.index), id: generateNodeId() })
     }
     if (match[1]) {
-      nodes.push({ type: 'bold', content: match[2] })
+      nodes.push({ type: 'bold', content: match[2], id: generateNodeId() })
     } else if (match[3]) {
-      nodes.push({ type: 'italic', content: match[4] })
+      nodes.push({ type: 'italic', content: match[4], id: generateNodeId() })
     }
     lastIndex = match.index + match[0].length
   }
 
   if (lastIndex < text.length) {
-    nodes.push({ type: 'text', content: text.slice(lastIndex) })
+    nodes.push({ type: 'text', content: text.slice(lastIndex), id: generateNodeId() })
   }
 
-  return nodes.length === 0 ? [{ type: 'text', content: text }] : nodes
+  return nodes.length === 0 ? [{ type: 'text', content: text, id: generateNodeId() }] : nodes
 }
 
 function renderNode(node: ParseNode): React.ReactNode {
@@ -271,41 +283,41 @@ function renderNode(node: ParseNode): React.ReactNode {
     case 'paragraph':
       return (
         <p className="markdown-paragraph">
-          {node.children?.map((child) => renderNode(child))}
+          {node.children?.map((child) => <React.Fragment key={child.id}>{renderNode(child)}</React.Fragment>)}
         </p>
       )
 
     case 'heading':
       const HeadingTag = `h${node.level}` as keyof JSX.IntrinsicElements
       return React.createElement(HeadingTag, { className: `markdown-heading markdown-h${node.level}` },
-        node.children?.map((child) => renderNode(child))
+        node.children?.map((child) => <React.Fragment key={child.id}>{renderNode(child)}</React.Fragment>)
       )
 
     case 'blockquote':
       return (
         <blockquote className="markdown-blockquote">
-          {node.children?.map((child) => renderNode(child))}
+          {node.children?.map((child) => <React.Fragment key={child.id}>{renderNode(child)}</React.Fragment>)}
         </blockquote>
       )
 
     case 'ul':
       return (
         <ul className="markdown-list markdown-ul">
-          {node.children?.map((child) => renderNode(child))}
+          {node.children?.map((child) => <React.Fragment key={child.id}>{renderNode(child)}</React.Fragment>)}
         </ul>
       )
 
     case 'ol':
       return (
         <ol className="markdown-list markdown-ol">
-          {node.children?.map((child) => renderNode(child))}
+          {node.children?.map((child) => <React.Fragment key={child.id}>{renderNode(child)}</React.Fragment>)}
         </ol>
       )
 
     case 'list_item':
       return (
         <li className="markdown-list-item">
-          {node.children?.map((child) => renderNode(child))}
+          {node.children?.map((child) => <React.Fragment key={child.id}>{renderNode(child)}</React.Fragment>)}
         </li>
       )
 
@@ -341,8 +353,8 @@ export function MarkdownRenderer({ content, className = '' }: MarkdownRendererPr
 
   return (
     <div className={`markdown-renderer ${className}`} data-testid="markdown-renderer">
-      {nodes.map((node, idx) => (
-        <React.Fragment key={idx}>{renderNode(node)}</React.Fragment>
+      {nodes.map((node) => (
+        <React.Fragment key={node.id}>{renderNode(node)}</React.Fragment>
       ))}
     </div>
   )
