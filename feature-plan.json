@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "current_feature": "markdown-renderer",
+  "current_feature": "scope-management",
   "features": [
     {
       "id": "core-skeleton",
@@ -70,7 +70,7 @@
     {
       "id": "scope-management",
       "title": "Scope of work management (IP ranges, ports, services)",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "CRUD for scope entries (IP/CIDR, port ranges, service names)",
         "Scope validation during agent task execution",

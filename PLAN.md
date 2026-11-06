@@ -4,7 +4,7 @@ Each round completes one feature or repair. Future items are planned, not implem
 
 ## Current round
 
-markdown-renderer
+scope-management
 
 ## Roadmap
 
@@ -40,7 +40,7 @@ Tests: `frontend/src/components/MarkdownRenderer.test.tsx`
 
 ### scope-management — Scope of work management (IP ranges, ports, services)
 
-Status: planned
+Status: done
 
 Acceptance:
 - CRUD for scope entries (IP/CIDR, port ranges, service names)

@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from sqlalchemy import String, DateTime, Boolean, Enum as SQLEnum
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.core.database import Base
 import enum
 
@@ -33,6 +33,9 @@ class User(Base):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
         nullable=False,
+    )
+    scope_entries: Mapped[list["ScopeEntry"]] = relationship(
+        "ScopeEntry", back_populates="creator", lazy="dynamic"
     )
 
     def __repr__(self) -> str:

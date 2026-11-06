@@ -6,7 +6,7 @@ import structlog
 
 from app.core.config import settings
 from app.core.database import init_db
-from app.api import auth, dashboard
+from app.api import auth, dashboard, scope
 
 structlog.configure(
     processors=[
@@ -76,6 +76,7 @@ def create_app() -> FastAPI:
     # Include routers
     app.include_router(auth.router, prefix="/api/v1")
     app.include_router(dashboard.router, prefix="/api/v1")
+    app.include_router(scope.router, prefix="/api/v1")
 
     return app
 
