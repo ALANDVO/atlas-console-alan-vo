@@ -105,3 +105,6 @@ Implementation: `backend/app/api/flows.py`, `backend/app/models/flow.py`, `backe
 
 Tests: `backend/tests/test_flows.py`, `frontend/src/pages/Flows.test.tsx`, `frontend/src/pages/FlowDetail.test.tsx`
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

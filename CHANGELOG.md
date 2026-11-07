@@ -66,3 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Development ports bound to 127.0.0.1
 - Persistent volumes for database and Keycloak data
 - TLS reverse proxy documentation
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

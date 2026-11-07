@@ -298,3 +298,7 @@ See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 *Atlas Console — Autonomous AI Penetration Testing Platform*
 *Alan Vo | AI & Machine Learning*
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
