@@ -1,8 +1,14 @@
 # Changelog
 
-## 1.3.0 — work-in-progress checkpoint
+## 1.4.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.3.0 — work-in-progress checkpoint
+
+### Fixed
+- Scope import endpoint now returns HTTP 201 Created (was 200 OK) to match REST semantics for resource creation
+
 
 ## 1.2.0 — work-in-progress checkpoint
 

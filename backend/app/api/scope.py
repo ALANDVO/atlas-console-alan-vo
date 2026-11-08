@@ -226,7 +226,11 @@ async def validate_target(
 
 
 # Import/Export endpoints
-@router.post("/import", response_model=ScopeImportExportResponse)
+@router.post(
+    "/import",
+    response_model=ScopeImportExportResponse,
+    status_code=status.HTTP_201_CREATED,
+)
 async def import_scope(
     request: ScopeImportRequest,
     session: AsyncSession = Depends(get_session),
