@@ -109,6 +109,7 @@ class ScopeService:
             return await self._validate_service(target)
         return False
 
+# Allowed target types: ip, port, service
     async def _validate_ip(self, ip_str: str) -> bool:
         """Validate if an IP is within any active IP range scope entries."""
         try:
