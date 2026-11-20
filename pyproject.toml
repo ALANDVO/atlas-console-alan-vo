@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "atlas-console"
-version = "1.0.0"
+version = "1.6.0"
 description = "Autonomous AI Penetration Testing Platform"
 readme = "README.md"
 license = {text = "MIT"}
