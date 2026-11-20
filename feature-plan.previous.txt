@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "current_feature": "resource-library",
+  "features": [
+    {
+      "id": "core-skeleton",
+      "title": "Core FastAPI/React skeleton with auth and basic dashboard",
+      "status": "done",
+      "acceptance": [ … ],
+      "implementation": [ … ],
+      "tests": [ … ]
+    },
+    {
+      "id": "markdown-renderer",
+      "title": "Markdown renderer with proper code block handling",
+      "status": "done",
+      "acceptance": [ … ],
+      "implementation": [ … ],
+      "tests": [
+        "frontend/src/components/MarkdownRenderer.test.tsx"
+      ]
+    },
+    {
+      "id": "scope-management",
+      "title": "Scope of work management (IP ranges, ports, services)",
+      "status": "done",
+      "acceptance": [ … ],
+      "implementation": [ … ],
+      "tests": [ … ]
+    },
+    {
+      "id": "resource-library",
+      "title": "Paginated resource library with virtual scrolling",
+      "status": "in_progress",
+      "acceptance": [
+        "Resources load in pages (not full 29MB fetch) - backend API implemented",
+        "Virtual scrolling for large lists - pending frontend",
+        "Search and filter by type, tags, date - pending"
+      ],
+      "implementation": [
+        "backend/app/api/resources.py",
+        "backend/app/models/resource.py",
+        "backend/app/services/resource_service.py",
+        "backend/tests/test_resources.py"
+      ],
+      "tests": [
+        "backend/tests/test_resources.py"
+      ]
+    },
+    { … },
+    { … },
+    { … }
+  ]
+}
