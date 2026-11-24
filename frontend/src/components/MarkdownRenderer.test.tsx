@@ -5,12 +5,15 @@ import { MarkdownRenderer, parseMarkdown, parseInline, escapeHtml } from './Mark
 describe('MarkdownRenderer', () => {
   describe('escapeHtml', () => {
     it('escapes HTML special characters', () => {
+      // HTML entities: & for &, < for <, > for >, " for "
+      // ' is escaped to &#039;
       expect(escapeHtml('<script>alert(1)</script>')).toBe('<script>alert(1)</script>')
       expect(escapeHtml('"quoted" & <tag>')).toBe('"quoted" & <tag>')
+      // ' is escaped to &#039;
       expect(escapeHtml("O'Reilly")).toBe('O&#039;Reilly')
     })
 
-    it('leaves plain text unchanged', () => {
+    it('leaves plain text unchanged when no special chars', () => {
       expect(escapeHtml('plain text')).toBe('plain text')
       expect(escapeHtml('')).toBe('')
     })

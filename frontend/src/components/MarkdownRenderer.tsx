@@ -20,14 +20,17 @@ interface MarkdownRendererProps {
   className?: string
 }
 
-// HTML escape utility
+// HTML escape utility - properly escapes HTML special characters to prevent XSS
 function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&')
-    .replace(/</g, '<')
-    .replace(/>/g, '>')
-    .replace(/"/g, '"')
-    .replace(/'/g, '&#039;')
+  // HTML escape utility - escapes special characters to prevent XSS
+  const entities: Record<string, string> = {
+    '&': '&',
+    '<': '<',
+    '>': '>',
+    '"': '"',
+    "'": '&#039;',
+  }
+  return text.replace(/[&<>"']/g, (match) => entities[match])
 }
 
 // Node types for the parsed AST
